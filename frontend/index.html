@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Urban Waste Management System</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <!-- Home Page -->
+    <div id="homePage" class="page-container">
+        <div class="header">
+            <h1>Urban Waste Management System</h1>
+            <h2>Select your role to continue</h2>
+        </div>
+
+        <div class="card-grid">
+          <div class="card">
+            <div class="icon"><i class="fa-solid fa-house" style="color: #8f5902;"></i></div>
+            <h2>Resident</h2>
+            <p>Report waste issues and track collection schedules</p>
+            <button onclick="location.href='resident/dashboard.html'">Continue as Resident</button>
+          </div>
+
+          <div class="card">
+            <div class="icon"><i class="fa-solid fa-building" style="color: #B197FC;"></i></div>
+            <h2>Municipal Staff</h2>
+            <p>Manage waste collection and view reports</p>
+            <button onclick="showMunicipalPortal()">Continue as Municipal Staff</button>
+          </div>
+
+          <div class="card">
+            <div class="icon"><i class="fa-solid fa-recycle" style="color: #4e9a06;"></i></div>
+            <h2>Recycler</h2>
+            <p>Access recyclable materials and manage pickups</p>
+            <button onclick="location.href='recycler/dashboard.html'">Continue as Recycler</button>
+          </div>
+        </div>
+    </div>
+
+    <!-- Municipal Staff Portal -->
+    <div id="municipalPortal" class="page-container" style="display: none;">
+        <button class="back-button" onclick="backToHome()">← Back</button>
+        
+        <div class="portal-container">
+            <h1 class="portal-title">Municipal Staff Portal</h1>
+            <p class="portal-subtitle">Sign in or create a new account</p>
+
+            <!-- Tabs -->
+            <div class="tab-container">
+                <button class="tab-button active" onclick="switchTab('login')">Login</button>
+                <button class="tab-button" onclick="switchTab('register')">Register</button>
+            </div>
+
+            <!-- Login Tab -->
+            <div id="loginTab" class="tab-content active">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" placeholder="Enter your email" class="form-input">
+                </div>
+
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" placeholder="Enter your password" class="form-input">
+                </div>
+
+                <button class="sign-in-button">Sign In</button>
+            </div>
+
+            <!-- Register Tab -->
+            <div id="registerTab" class="tab-content">
+                <div class="form-group">
+                    <label for="registerName">Full Name</label>
+                    <input type="text" id="registerName" placeholder="Enter your full name" class="form-input">
+                </div>
+
+                <div class="form-group">
+                    <label for="registerEmail">Email</label>
+                    <input type="email" id="registerEmail" placeholder="Enter your email" class="form-input">
+                </div>
+
+                <div class="form-group">
+                    <label for="registerPassword">Password</label>
+                    <input type="password" id="registerPassword" placeholder="Enter your password" class="form-input">
+                </div>
+
+                <div class="form-group">
+                    <label for="registerConfirm">Confirm Password</label>
+                    <input type="password" id="registerConfirm" placeholder="Confirm your password" class="form-input">
+                </div>
+
+                <button class="sign-in-button">Create Account</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/index.js"></script>
+</body>
+</html>
