@@ -19,81 +19,223 @@
             <div class="icon"><i class="fa-solid fa-house" style="color: #8f5902;"></i></div>
             <h2>Resident</h2>
             <p>Report waste issues and track collection schedules</p>
-            <button onclick="location.href='resident/dashboard.html'">Continue as Resident</button>
+            <button onclick="showResidentPortal()">Continue as Resident</button>
           </div>
 
           <div class="card">
             <div class="icon"><i class="fa-solid fa-building" style="color: #B197FC;"></i></div>
             <h2>Municipal Staff</h2>
             <p>Manage waste collection and view reports</p>
-            <button onclick="showMunicipalPortal()">Continue as Municipal Staff</button>
+           <button onclick="showStaffPortal()">Continue as Municipal Staff</button>
           </div>
 
           <div class="card">
             <div class="icon"><i class="fa-solid fa-recycle" style="color: #4e9a06;"></i></div>
             <h2>Recycler</h2>
             <p>Access recyclable materials and manage pickups</p>
-            <button onclick="location.href='recycler/dashboard.html'">Continue as Recycler</button>
+            <button onclick="showRecyclerPortal()">Continue as Recycler</button>
           </div>
         </div>
     </div>
 
     <!-- Municipal Staff Portal -->
-    <div id="municipalPortal" class="page-container" style="display: none;">
-        <button class="back-button" onclick="backToHome()">← Back</button>
-        
-        <div class="portal-container">
-            <h1 class="portal-title">Municipal Staff Portal</h1>
-            <p class="portal-subtitle">Sign in or create a new account</p>
+    <div id="staffPortal" class="page-container" style="display: none;">
+    <button class="back-button" onclick="backToHome()">← Back</button>
 
-            <!-- Tabs -->
-            <div class="tab-container">
-                <button class="tab-button active" onclick="switchTab('login')">Login</button>
-                <button class="tab-button" onclick="switchTab('register')">Register</button>
+    <div class="portal-container">
+        <h1 class="portal-title">Municipal Staff Portal</h1>
+        <p class="portal-subtitle">Manage waste collection and reports</p>
+
+        <!-- Tabs -->
+        <div class="tab-container">
+            <button class="tab-button active" onclick="switchStaffTab('login')">Login</button>
+            <button class="tab-button" onclick="switchStaffTab('register')">Register</button>
+        </div>
+
+        <!-- Login Tab -->
+        <div id="staffLoginTab" class="tab-content active">
+            <div class="form-group">
+                <label for="staffLoginEmail">Email</label>
+                <input type="email" id="staffLoginEmail" placeholder="Enter your email" class="form-input">
             </div>
 
-            <!-- Login Tab -->
-            <div id="loginTab" class="tab-content active">
-                <div class="form-group">
-                    <label for="loginEmail">Email</label>
-                    <input type="email" id="loginEmail" placeholder="Enter your email" class="form-input">
-                </div>
-
-                <div class="form-group">
-                    <label for="loginPassword">Password</label>
-                    <input type="password" id="loginPassword" placeholder="Enter your password" class="form-input">
-                </div>
-
-                <button class="sign-in-button">Sign In</button>
+            <div class="form-group">
+                <label for="staffLoginPassword">Password</label>
+                <input type="password" id="staffLoginPassword" placeholder="Enter your password" class="form-input">
             </div>
 
-            <!-- Register Tab -->
-            <div id="registerTab" class="tab-content">
-                <div class="form-group">
-                    <label for="registerName">Full Name</label>
-                    <input type="text" id="registerName" placeholder="Enter your full name" class="form-input">
-                </div>
+            <button class="sign-in-button" id="staffLoginBtn">Sign In</button>
 
-                <div class="form-group">
-                    <label for="registerEmail">Email</label>
-                    <input type="email" id="registerEmail" placeholder="Enter your email" class="form-input">
-                </div>
+            <p id="staffLoginMessage"></p>
+        </div>
 
-                <div class="form-group">
+        <!-- Register Tab -->
+        <div id="staffRegisterTab" class="tab-content">
+            <div class="form-group">
+                <label for="staffFullname">Full Name</label>
+                <input type="text" id="staffFullname" placeholder="Enter your full name" class="form-input">
+            </div>
+
+            <div class="form-group">
+                <label for="staffEmail">Email</label>
+                <input type="email" id="staffEmail" placeholder="Enter your email" class="form-input">
+            </div>
+
+            <div class="form-group">
+                <label for="staffMobile">Mobile Number</label>
+                <input type="tel" id="staffMobile" placeholder="Enter your mobile number" class="form-input">
+            </div>
+
+            <div class="form-group">
+                <label for="staffPassword">Password</label>
+                <input type="password" id="staffPassword" placeholder="Enter your password" class="form-input">
+            </div>
+
+            <div class="form-group">
+                <label for="staffConfirm">Confirm Password</label>
+                <input type="password" id="staffConfirm" placeholder="Confirm your password" class="form-input">
+            </div>
+
+            <button class="sign-in-button" id="staffRegisterBtn">Create Account</button>
+
+            <p id="staffMessage"></p>
+        </div>
+    </div>
+</div>
+
+<!-- Resident Portal -->
+<div id="residentPortal" class="page-container" style="display: none;">
+    <button class="back-button" onclick="backToHome()">← Back</button>
+
+    <div class="portal-container">
+        <h1 class="portal-title">Resident Portal</h1>
+        <p class="portal-subtitle">Sign up to report waste issues</p>
+
+        <!-- Tabs -->
+        <div class="tab-container">
+            <button class="tab-button active" onclick="switchResidentTab('login')">Login</button>
+            <button class="tab-button" onclick="switchResidentTab('register')">Register</button>
+        </div>
+
+        <!-- Login Tab -->
+       <div id="residentLoginTab" class="tab-content active">
+    <div class="form-group">
+        <label for="residentLoginEmail">Email</label>
+        <input type="email" id="residentLoginEmail" placeholder="Enter your email" class="form-input">
+    </div>
+
+    <div class="form-group">
+        <label for="residentLoginPassword">Password</label>
+        <input type="password" id="residentLoginPassword" placeholder="Enter your password" class="form-input">
+    </div>
+
+    <button class="sign-in-button" id="residentLoginBtn">Sign In</button>
+
+    <p id="loginMessage"></p>
+</div>
+        <!-- Register Tab -->
+        <div id="residentRegisterTab" class="tab-content">
+            <div class="form-group">
+                <label for="residentFullname">Full Name</label>
+                <input type="text" id="residentFullname" placeholder="Enter your full name" class="form-input">
+            </div>
+
+            <div class="form-group">
+                <label for="residentEmail">Email</label>
+                <input type="email" id="residentEmail" placeholder="Enter your email" class="form-input">
+            </div>
+
+            <div class="form-group">
+                <label for="residentMobile">Mobile Number</label>
+                <input type="tel" id="residentMobile" placeholder="Enter your mobile number" class="form-input">
+            </div>
+              <div class="form-group">
                     <label for="registerPassword">Password</label>
                     <input type="password" id="registerPassword" placeholder="Enter your password" class="form-input">
                 </div>
 
                 <div class="form-group">
                     <label for="registerConfirm">Confirm Password</label>
-                    <input type="password" id="registerConfirm" placeholder="Confirm your password" class="form-input">
+                    <input type="password" id="resConfirm" placeholder="Confirm your password" class="form-input">
                 </div>
 
-                <button class="sign-in-button">Create Account</button>
-            </div>
+
+            <button class="sign-in-button" id="residentRegisterBtn">Create Account</button>
+
+            <p id="residentMessage"></p>
         </div>
     </div>
+</div>
 
+<!-- Recycler Portal -->
+<div id="recyclerPortal" class="page-container" style="display: none;">
+    <button class="back-button" onclick="backToHome()">← Back</button>
+
+    <div class="portal-container">
+        <h1 class="portal-title">Recycler Portal</h1>
+        <p class="portal-subtitle">Access recyclable materials and manage pickups</p>
+
+        <!-- Tabs -->
+        <div class="tab-container">
+            <button class="tab-button active" onclick="switchRecyclerTab('login')">Login</button>
+            <button class="tab-button" onclick="switchRecyclerTab('register')">Register</button>
+        </div>
+
+        <!-- Login Tab -->
+        <div id="recyclerLoginTab" class="tab-content active">
+            <div class="form-group">
+                <label for="recyclerLoginEmail">Email</label>
+                <input type="email" id="recyclerLoginEmail" placeholder="Enter your email" class="form-input">
+            </div>
+
+            <div class="form-group">
+                <label for="recyclerLoginPassword">Password</label>
+                <input type="password" id="recyclerLoginPassword" placeholder="Enter your password" class="form-input">
+            </div>
+
+            <button class="sign-in-button" id="recyclerLoginBtn">Sign In</button>
+
+            <p id="recyclerLoginMessage"></p>
+        </div>
+
+        <!-- Register Tab -->
+        <div id="recyclerRegisterTab" class="tab-content">
+            <div class="form-group">
+                <label for="recyclerFullname">Full Name</label>
+                <input type="text" id="recyclerFullname" placeholder="Enter your full name" class="form-input">
+            </div>
+
+            <div class="form-group">
+                <label for="recyclerEmail">Email</label>
+                <input type="email" id="recyclerEmail" placeholder="Enter your email" class="form-input">
+            </div>
+
+            <div class="form-group">
+                <label for="recyclerMobile">Mobile Number</label>
+                <input type="tel" id="recyclerMobile" placeholder="Enter your mobile number" class="form-input">
+            </div>
+
+            <div class="form-group">
+                <label for="recyclerPassword">Password</label>
+                <input type="password" id="recyclerPassword" placeholder="Enter your password" class="form-input">
+            </div>
+
+            <div class="form-group">
+                <label for="recyclerConfirm">Confirm Password</label>
+                <input type="password" id="recyclerConfirm" placeholder="Confirm your password" class="form-input">
+            </div>
+
+            <button class="sign-in-button" id="recyclerRegisterBtn">Create Account</button>
+
+            <p id="recyclerMessage"></p>
+        </div>
+    </div>
+</div>
     <script src="js/index.js"></script>
+    <script src="js/resident_login_reg.js"></script>
+    <script src="js/staff_login_reg.js"></script>
+    <script src="js/recycler_login_reg.js"></script>
+
+
 </body>
 </html>
