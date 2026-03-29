@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>EcoCity Dashboard</title>
+  <link rel="stylesheet" href="staff_dash.css">
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header class="dashboard-header">
+  <div class="logo-section">
+    <div class="logo">🚛</div>
+    <div>
+      <h2>EcoCity Municipal</h2>
+      <p>Field Staff Operations</p>
+    </div>
+  </div>
+
+  <div class="user-info">
+    <span id="user">User</span>
+    <p class="status">Online • ID: STF-2026-001</p>
+    <button onclick="logout()">Logout</button>
+  </div>
+</header>
+
+<!-- NAVBAR -->
+<div class="tabs">
+  <button class="active" onclick="showTab('dashboard', this)">Dashboard</button>
+  <button onclick="showTab('requests', this)">Requests</button>
+  <button onclick="showTab('details', this)">Details</button>
+  <button onclick="showTab('transit', this)">Transit</button>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard" class="tab-content active">
+  <div class="dashboard-cards">
+    <div class="card stat-card">
+      <h4>Today's Pickup</h4>
+      <h1 id="todayCount">0</h1>
+    </div>
+
+    <div class="card stat-card yellow">
+      <h4>Pending Pickups</h4>
+      <h1 id="pendingCount">0</h1>
+    </div>
+  </div>
+
+  <div class="quick-actions">
+  <button class="primary" onclick="showTabDirect('requests')">
+    Confirm New Pickup
+  </button>
+
+  <button class="secondary" onclick="showTabDirect('details')">
+    Update Status
+  </button>
+</div>
+</div>
+
+<!-- REQUESTS -->
+<div id="requests" class="tab-content">
+  <div class="card">
+    <h3>Assigned Pickup Requests</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Resident</th>
+          <th>Address</th>
+          <th>Type</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="table"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- DETAILS -->
+<div id="details" class="tab-content">
+
+  <div class="details-grid">
+
+    <!-- LEFT: PICKUP SUMMARY -->
+    <div class="card summary-card">
+
+      <h3>Pickup Summary</h3>
+
+      <div class="summary-box">
+        <span class="label">RESIDENT</span>
+        <p id="d_name">John Doe</p>
+      </div>
+
+      <div class="summary-box">
+        <span class="label">ADDRESS</span>
+        <p id="d_address">123 Maple St, Block A</p>
+      </div>
+
+      <div class="row">
+        <div class="summary-box small">
+          <span class="label">WASTE TYPE</span>
+          <p id="d_type">Organic</p>
+        </div>
+
+        <div class="summary-box small">
+          <span class="label">QUANTITY</span>
+          <p id="d_qty">2 Bags</p>
+        </div>
+      </div>
+
+      <span class="status-badge">Confirmed</span>
+
+    </div>
+
+
+    <!-- RIGHT: UPDATE SECTION -->
+    <div class="card update-card">
+
+      <h3>Update Collection Progress</h3>
+      <p class="subtext">Log field details upon arriving at the location</p>
+
+      <div class="row">
+        <div class="input-box">
+          <label>Staff ID (Assigned)</label>
+          <input type="text" value="STF-2026-001" readonly>
+        </div>
+
+        <div class="input-box">
+          <label>Collection Time</label>
+          <input type="time" id="time">
+        </div>
+      </div>
+
+      <!-- Checkbox -->
+      <div class="success-box">
+        <input type="checkbox" id="collected">
+        <label for="collected">Waste Successfully Collected</label>
+      </div>
+
+      <!-- Buttons -->
+      <div class="details-actions">
+        <button class="primary" onclick="updateStatus('collected')">
+          Update Status to Collected
+        </button>
+
+        <button class="secondary" onclick="updateStatus('confirmed')">
+          Mark as Confirmed
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<div id="transit" class="tab-content">
+
+  <div class="card transit-card">
+
+    <h3>Transit & Segregation Compliance</h3>
+    <p class="subtext">Final checks before transporting to processing facility</p>
+
+    <!-- ACTIVE TRANSIT -->
+    <div class="transit-info">
+      <div class="icon-box">🚛</div>
+      <div>
+        <p class="label">ACTIVE VEHICLE TRANSIT</p>
+        <h4>Pickup ID: <span id="pickupId">REQ-001</span></h4>
+      </div>
+
+      <span class="status-badge blue">IN TRANSIT</span>
+    </div>
+
+    <!-- CHECKLIST -->
+    <h4 class="check-title">✔ Segregation Compliance Checklist</h4>
+
+    <div class="check-grid">
+
+      <div class="check-card">
+        <input type="checkbox" id="seg">
+        <div>
+          <p>Primary Segregation</p>
+          <small>Waste sorted at source</small>
+        </div>
+      </div>
+
+      <div class="check-card">
+        <input type="checkbox" id="haz">
+        <div>
+          <p>No Hazardous Mix</p>
+          <small>Non-toxic waste only</small>
+        </div>
+      </div>
+
+      <div class="check-card">
+        <input type="checkbox" id="pack">
+        <div>
+          <p>Proper Packaging</p>
+          <small>Secure and leak-proof</small>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- BUTTON -->
+    <button class="complete-btn" onclick="completeTransit()">
+      Complete Disposal & Update Status
+    </button>
+
+    <p class="note">
+      Completing this will log the transit final time and location coordinates.
+    </p>
+
+  </div>
+
+</div>
+
+
+<script src="staff_dashboard.js"></script>
+
+</body>
+</html>

@@ -111,8 +111,13 @@ document.getElementById('staffLoginBtn').addEventListener('click', async () => {
 
             alert("STAFF LOGIN SUCCESSFUL ✅");
 
+             // ✅ SAVE USER (IMPORTANT)
+    localStorage.setItem("staff", JSON.stringify({
+        fullname: result.user?.fullname || email
+    }));
+
             // optional redirect
-            // window.location.href = "staff/dashboard.html";
+            window.location.href = "staff/dashboard.html";
 
         } else {
             message.style.color = "red";
