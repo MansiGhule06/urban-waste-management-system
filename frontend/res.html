@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Waste Management</title>
+<link rel="stylesheet" href="css/res_dashboard.css">
+      <script src="js/res_dashboard.js"></script>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+ 
+</head>
+<body>
+
+  <header class="dashboard-header">
+  <div class="logo-section">
+    <div class="logo"> <i class="fa-solid fa-trash"></i></div>
+    <div>
+      <h2>Waste Management System</h2>
+      <p style="color: #4b5563;">Residents Portal</p>
+    </div>
+  </div>
+
+  <div class="user-info">
+    <span id="user">User</span>
+    <p class="status">Online • ID: STF-2026-001</p>
+    <button onclick="logout()">Logout</button>
+  </div>
+</header>
+
+  <!-- Navigation -->
+  <div class="nav-buttons">
+  <button class="active" data-tab="overview">Overview</button>
+  <button data-tab="schedule">Schedule Pickup</button>
+  <button data-tab="history">Pickup History</button>
+  <button data-tab="track">Track Waste</button>
+  <button data-tab="reports">My Reports</button>
+  <button data-tab="rewards">Rewards</button>
+</div>
+<div class="tab-content" id="overview">
+  <!-- Notifications -->
+  <div class="container">
+    <div class="card">
+      <h3>
+        <i class="fa-regular fa-bell" style="color: rgb(116, 192, 252); margin-right: 8px;"></i>
+        Notifications <span class="badge" id="badge">2 New</span>
+      </h3>
+      <p class="small">Pickup reminders and status updates</p>
+
+      <div id="notificationList"></div>
+
+    </div>
+    <div class="cards_a">
+     <div class="card_a">
+      <div class="card-header_a">
+        <span>New Collection</span>
+        <i class="fa-solid fa-trash"></i>
+      </div>
+      <div class="card-value_a" id="pickupCount">0</div>
+      <div class="card-subtext_a">This month</div>
+    </div>
+
+   <div class="card_a">
+      <div class="card-header_a">
+        <span>Active Reports</span>
+        <i class="fa-regular fa-calendar"></i>
+      </div>
+      <div class="card-value_a" id="reportCount">0</div>
+      <div class="card-subtext_a">Upcoming pickups</div>
+    </div>
+
+   <div class="card_a">
+      <div class="card-header_a">
+        <span>Recycling Points</span>
+        <i class="fa-solid fa-location-crosshairs"></i>
+      </div>
+      <div class="card-value_a" id="points">0</div>
+      <div class="card-subtext_a">In progress</div>
+    </div></div>
+
+    <div class="issue-card">
+    <div class="issue-text">
+     <h3 style="margin-bottom: 10px;">Report Issue</h3>
+      <p class="small">Have an issue with your waste management service? Let us know!</p>
+
+    </div>
+
+<button class="issue-btn" onclick="openModal()">
+      <span>+</span> Report New Issue
+    </button>
+  </div>
+  </div>
+  <!-- ================= REPORT ISSUE MODAL ================= -->
+<div class="modal-overlay" id="issueModal">
+  <div class="modal">
+    <h3>Report New Issue</h3>
+    <p class="modal-subtext">
+      Provide details about the waste management issue
+    </p>
+
+    <label>Issue Type</label>
+    <select id="issuetype">
+      <option>Select issue type</option>
+      <option>Missed Pickup</option>
+      <option>Overflowing Bin</option>
+      <option>Illegal Dumping</option>
+      <option>Other</option>
+    </select>
+
+    <label>Location</label>
+    <input type="text" placeholder="Enter street name or address" id="address">
+
+    <label>Description</label>
+    <textarea placeholder="Provide details about the issue" id="description"></textarea>
+
+    <div class="modal-actions">
+      <button class="submit-btn" onclick="submitreport()">Submit Report</button>
+      <button class="cancel-btn" onclick="closeModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+</div>
+<div class="tab-content" id="schedule" style="display:none">
+  <div class="container">
+    <div class="card">
+    <h3 style="margin-bottom: 10px;">Schedule a Pickup</h3>
+      <p class="small">Create a waste pickup request for special items</p>
+<p style="font-size: 15px;">Waste Type</p>
+    <div class="cards_a" style="margin-top: 0;">
+     <div class="card_a" onclick="selectCard(this);" data-value="e-waste">
+      <div class="card-header_a">
+        </i>E-Waste
+      </div>
+      <div class="card-value_a"><i class="fa-solid fa-laptop fa-beat" style="color: rgb(116, 192, 252);"></i></div>
+      <div class="card-subtext_a">Electronics, batteries, appliances</div>
+    </div>
+
+   <div class="card_a" onclick="selectCard(this)" data-value="hazardous">
+      <div class="card-header_a">  
+      Hazardous
+      </div>
+      <div class="card-value_a"><i class="fa-solid fa-triangle-exclamation fa-beat" style="color: rgb(116, 192, 252);"></i></div>
+      <div class="card-subtext_a">Chemicals, paint, pesticides</div>
+    </div>
+
+   </div>
+  <div class="cards_a">
+     <div class="card_a" onclick="selectCard(this);" data-value="bulk">
+      <div class="card-header_a">
+        <span>Bulk</span>
+      </div>
+      <div class="card-value_a"><i class="fa-solid fa-bed fa-beat" style="color: rgb(116, 192, 252);"></i></div>
+      <div class="card-subtext_a">Furniture, large items</div>
+    </div>
+
+   <div class="card_a" onclick="selectCard(this);" data-value="organic">
+      <div class="card-header_a">
+        <span>Organic</span>
+      </div>
+      <div class="card-value_a"><i class="fa-solid fa-leaf fa-beat" style="color: rgb(116, 192, 252);"></i></div>
+      <div class="card-subtext_a">Food waste, yard waste</div>
+    </div>
+
+   </div>
+   <p style="font-size: 15px; margin-bottom: 5px; font-weight: 100;">Quantity/Items *</p>
+    <input type="text" id="items" placeholder="e.g., 2 items, 3 bags, 1 furniture piece " style="margin-top: 0;">
+    <p style="font-size: 15px; margin-bottom: 5px; font-weight: 100;"><i class="fa-regular fa-calendar" style="color: rgb(8, 8, 8);"></i> Preferred Pickup Date *</p>
+    <input type="date" id="date" style="margin-top: 0;">
+   <p style="font-size: 15px; margin-bottom: 5px; font-weight: 100;"><i class="fa-solid fa-location-crosshairs" style="color: rgb(8, 8, 8);"></i> Pickup Address *</p>
+    <input type="text" id="resaddress" placeholder="Enter your address" style="margin-top: 0;">
+    <p style="font-size: 15px;margin-bottom: 5px; font-weight: 100;"><i class="fa-solid fa-city" style="color: rgb(8, 8, 8);"></i> City *</p>    
+<input type="text" id="city" placeholder="Enter your city" style="margin-top: 0; margin-bottom: 20px;">
+
+<button class="issue-btn" type="button" onclick="submitpickup()">
+      <span>+</span>Submit Pickup Request
+    </button>
+  </div>
+  
+    </div>
+    
+  </div>
+</div>
+
+<div class="tab-content" id="history" style="display:none">
+  <div class="container">
+    <div class="card">
+    <h3 style="margin-bottom: 10px;">Pickup History</h3>
+      <p class="small">View and filter your past waste pickups</p>
+    <div class="cards_a" style="margin-top: 10px;">
+     <!-- FILTER BAR -->
+      
+<div class="card_b">
+  <h3><i class="fa-solid fa-filter" style="margin-right:8px;"></i> Filter History</h3>
+
+  <div class="filters">
+    <select id="monthFilter">
+    <option value="">All months</option>
+      <option value="01">January</option>
+      <option value="02">February</option>
+      <option value="03">March</option>
+      <option value="04">April</option>
+      <option value="05">May</option>
+      <option value="06">June</option>
+      <option value="07">July</option>
+      <option value="08">August</option>
+      <option value="09">September</option>
+      <option value="10">October</option>
+      <option value="11">November</option>
+      <option value="12">December</option>
+    </select>
+
+    <select id="typeFilter">
+      <option value="">All Waste Types</option>
+      <option value="e-waste">E-Waste</option>
+      <option value="bulk">Bulk</option>
+      <option value="organic">Organic</option>
+      <option value="hazardous">Hazardous</option>
+    </select>
+
+    <button class="clear-btn">Clear Filters</button>
+  </div>
+</div>
+   </div>
+     <div id="historyContainer"></div>
+
+  </div>
+  
+    </div>
+    
+  </div>
+</div>
+
+<div class="tab-content" id="track" style="display:none">
+  <div class="container">
+    <div class="card">
+    <div class="track-container">
+  
+ <h3 style="margin-bottom: 10px;">Track Your Waste - Transparency & Trust</h3>
+      <p class="small">Enter your tracking ID to see the complete journey of your waste from pickup to processing</p>
+
+  <div class="track-bar">
+    <p style="margin-bottom: 0;">Tracking ID</p>
+    <input type="text" id="trackId" placeholder="TRK-2026-001">
+    <button style="border-radius: 5px; width: 100px; margin-top: 10px; background:#020617; color: #d1fae5;" onclick="trackWaste()">Track</button>
+  </div>
+
+  <!-- RESULT CARD -->
+ 
+  
+<div class="timeline-container" id="timelineContainer">
+  <div class="timeline-progress" id="timelineProgress"></div>
+
+  
+
+ 
+</div>
+    </div>
+  </div>  
+</div></div>
+
+  </div>
+</div>
+
+<div class="tab-content" id="reports" style="display:none">
+  <div class="container">
+    <div class="card">
+      <h3 style="margin-bottom: 10px;">My Reports</h3>
+      <p class="small">Check status of your reported issues.</p>
+    <div class="issue-list" id="reportList"></div>
+    </div>
+</div>
+  </div>
+</div>
+
+<div class="tab-content" id="rewards" style="display:none">
+  <div class="container">
+    <div class="card">
+      <div class="rewards-container">
+
+  <h3>🎁 Rewards & Points</h3>
+  <p class="small">Earn points for every recycled waste and redeem rewards</p>
+
+  <!-- POINTS CARD -->
+  <div class="points-card">
+    <h2 id="points">0</h2>
+    <p>Total Recycling Points</p>
+  </div>
+
+  <!-- REWARDS LIST -->
+  <div class="rewards-grid">
+
+    <div class="reward-card">
+      <h4>♻️ Eco Badge</h4>
+      <p>Earn 50 points</p>
+      <button onclick="redeemReward(50, 'Eco Badge')">Redeem</button>
+    </div>
+
+    <div class="reward-card">
+      <h4>🌱 Tree Plantation</h4>
+      <p>100 points</p>
+      <button onclick="redeemReward(100, 'Plant a Tree')">Redeem</button>
+    </div>
+
+    <div class="reward-card">
+      <h4>🎟 Discount Coupon</h4>
+      <p>150 points</p>
+      <button onclick="redeemReward(150, 'Discount Coupon')">Redeem</button>
+    </div>
+
+  </div>
+</div>
+      </div>
+  </div>
+</div>
+  
+</body>
+</html>

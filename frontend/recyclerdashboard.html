@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>EcoCycle Dashboard</title>
+
+<link rel="stylesheet" href="css/recycler.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<!-- HEADER -->
+ <header class="dashboard-header">
+  <div class="logo-section">
+    <div class="logo"> <i class="fa-solid fa-recycle"></i></div>
+    <div>
+      <h2>EcoCity Recycler</h2>
+      <p style="color: #4b5563;">Recycler Portal</p>
+    </div>
+  </div>
+
+  <div class="user-info">
+    <span id="user">User</span>
+    <p class="status" id="userid"></p>
+    <button onclick="logout()">Logout</button>
+  </div>
+</header>
+
+
+<div class="container">
+
+<h2 style="margin-bottom: 10px;">Facility Overview</h2>
+<p style="margin-top: 0;color:rgb(199, 205, 210)">Manage incoming waste streams and track processing efficiency.</p>
+<div class="cards">
+
+  <div class="card ">
+    <div class="card-left">
+      <div class="title">Incoming Waste</div>
+        <div class="number" id="incoming">0</div>
+      <div class="sub green-text">↗ +12% <span>vs last week</span></div>
+    </div>
+    <div class="icon-box blue-bg">
+      <i class="fa-solid fa-truck"></i>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-left">
+      <div class="title">Pending Arrival</div>
+      <div class="number" id="pending">0</div>
+      <div class="sub">Expected within 24 hours</div>
+    </div>
+    <div class="icon-box orange-bg">
+      <i class="fa-regular fa-clock"></i>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-left">
+      <div class="title">In Processing</div>
+      <div class="number" id="processing">0</div>
+      <div class="sub">Currently on floor</div>
+    </div>
+    <div class="icon-box green-bg">
+      <i class="fa-solid fa-rotate"></i>
+    </div>
+  </div>
+
+</div>
+
+<!-- TABS -->
+<div class="tabs">
+    <div class="tab active" onclick="showTab('tableSection', this)">Incoming Waste</div>
+    <div class="tab" onclick="showTab('reportSection', this)">Operational Reports</div>
+</div>
+
+<!-- SEARCH -->
+<div class="search">
+    <input type="text" placeholder="Search pickup ID..." onkeyup="searchTable(this.value)">
+</div>
+
+<!-- TABLE -->
+<div id="tableSection" class="table">
+<h3>Waste Logistics Log</h3>
+
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Type</th>
+<th>Date</th>
+<th>Qty</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody id="tbody"></tbody>
+</table>
+</div>
+
+<!-- REPORT -->
+<div id="reportSection" class="report">
+<h3>Material Distribution</h3>
+<p>Composition of waste materials processed this month.</p>
+
+<div style="display:flex; gap:30px; align-items: center;">
+
+  <!-- LEFT CARD -->
+  <div class="chart-card">
+    <h3>Material Distribution</h3>
+    <p>Composition of waste materials processed this month.</p>
+    <canvas id="materialChart"></canvas>
+  </div>
+
+  <!-- RIGHT CARD -->
+  <div class="chart-card">
+    <h3>Processing Efficiency</h3>
+    <p>Daily breakdown of recycled vs disposed waste (in kg).</p>
+    <canvas id="efficiencyChart"></canvas>
+  </div>
+
+</div>
+</div>
+
+</div>
+
+<script src="js/recycler.js"></script>
+</body>
+</html>

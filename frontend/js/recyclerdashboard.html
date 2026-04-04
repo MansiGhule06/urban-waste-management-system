@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>EcoCycle Dashboard</title>
+
+<link rel="stylesheet" href="css/recycler.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+    <div class="logo">♻ EcoCycle</div>
+    <div>User | Facility Manager</div>
+</div>
+
+<div class="container">
+
+<h2>Facility Overview</h2>
+
+<div class="cards">
+    <div class="card">In Transit <div class="number" id="In Transit">0</div><BR><i class="fa-solid fa-truck" style="color: rgb(116, 192, 252);"></i></div>
+    <div class="card">Received <div class="number" id="received">0</div></div>
+    <div class="card">Processing <div class="number" id="processing">0</div></div>
+</div>
+
+<!-- TABS -->
+<div class="tabs">
+    <div class="tab active" onclick="showTab('tableSection', this)">Incoming Waste</div>
+    <div class="tab" onclick="showTab('reportSection', this)">Operational Reports</div>
+</div>
+
+<!-- SEARCH -->
+<div class="search">
+    <input type="text" placeholder="Search pickup ID..." onkeyup="searchTable(this.value)">
+</div>
+
+<!-- TABLE -->
+<div id="tableSection" class="table">
+<h3>Waste Logistics Log</h3>
+
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Type</th>
+<th>Qty</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody id="tbody"></tbody>
+</table>
+</div>
+
+<!-- REPORT -->
+<div id="reportSection" class="report">
+<h3>Material Distribution</h3>
+<p>Composition of waste materials processed this month.</p>
+
+<div class="chart-container">
+    <canvas id="chart"></canvas>
+</div>
+</div>
+
+</div>
+
+<script src="js/recycler.js"></script>
+</body>
+</html>

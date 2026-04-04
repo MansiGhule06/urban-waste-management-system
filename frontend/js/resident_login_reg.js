@@ -133,19 +133,18 @@ if (response.ok) {
             const response = await fetch('http://localhost:3000/api/resident/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, pass })
-            });
+                body: JSON.stringify({ email, password: pass })            });
 
             const result = await response.json();
 
             if (response.ok) {
                 message.style.color = "green";
                 message.textContent = result.message;
-
+                    localStorage.setItem("resident", JSON.stringify(result.user));
                 alert("LOGIN SUCCESSFUL ✅");
 
                 // redirect (optional)
-                // window.location.href = "resident/dashboard.html";
+                 window.location.href = "res.html";
 
             } else {
                 message.style.color = "red";

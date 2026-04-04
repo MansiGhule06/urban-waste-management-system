@@ -348,9 +348,61 @@ button.secondary {
   transition: 0.2s;
 }
 
-/* NOTE TEXT */
-.note {
-  margin-top: 10px;
+/* HOVER INPUT EFFECT */
+select:hover {
+  border: 2px solid #74c0fc;
+}
+.issue-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* CARD */
+.issue-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f9fafb;
+  padding: 18px 20px;
+  border-radius: 14px;
+  border: 1px solid #e5e7eb;
+  transition: 0.2s;
+}
+
+/* HOVER EFFECT */
+.issue-item:hover {
+  background: #f3f4f6;
+}
+
+/* LEFT SIDE */
+.issue-item .left {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+/* ICON */
+.icon {
+  color: #3b82f6;
+  font-size: 18px;
+  margin-top: 4px;
+}
+
+/* TEXT */
+.issue-item h4 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.issue-item p {
+  margin: 2px 0;
+  font-size: 14px;
+  color: #374151;
+}
+
+.issue-item span {
   font-size: 12px;
-  color: gray;
+  color: #6b7280;
 }

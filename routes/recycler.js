@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Recycler = require('../models/Recycler');
+const Recycler = require('../models/recycler');
 
 // REGISTER
 router.post('/register', async (req, res) => {
@@ -37,13 +37,15 @@ router.post('/login', async (req, res) => {
             return res.status(400).json({ message: "User not found ❌" });
         }
 
-        if (staff.pass !== pass) {
+        // 🔥 FIXED HERE
+        if (recycler.pass !== pass) {
             return res.status(400).json({ message: "Invalid password ❌" });
         }
 
         res.json({ message: "Login successful ✅", recycler });
 
     } catch (err) {
+        console.error(err); // optional debug
         res.status(500).json({ message: "Server error" });
     }
 });

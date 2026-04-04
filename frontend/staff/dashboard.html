@@ -19,7 +19,7 @@
 
   <div class="user-info">
     <span id="user">User</span>
-    <p class="status">Online • ID: STF-2026-001</p>
+    <p class="status" id="status"></p>
     <button onclick="logout()">Logout</button>
   </div>
 </header>
@@ -30,6 +30,8 @@
   <button onclick="showTab('requests', this)">Requests</button>
   <button onclick="showTab('details', this)">Details</button>
   <button onclick="showTab('transit', this)">Transit</button>
+    <button onclick="showTab('reports', this)">Reports</button>
+
 </div>
 
 <!-- DASHBOARD -->
@@ -89,27 +91,27 @@
 
       <div class="summary-box">
         <span class="label">RESIDENT</span>
-        <p id="d_name">John Doe</p>
+        <p id="d_name"></p>
       </div>
 
       <div class="summary-box">
         <span class="label">ADDRESS</span>
-        <p id="d_address">123 Maple St, Block A</p>
+        <p id="d_address"></p>
       </div>
 
       <div class="row">
         <div class="summary-box small">
           <span class="label">WASTE TYPE</span>
-          <p id="d_type">Organic</p>
+          <p id="d_type"></p>
         </div>
 
         <div class="summary-box small">
           <span class="label">QUANTITY</span>
-          <p id="d_qty">2 Bags</p>
+          <p id="d_qty"></p>
         </div>
       </div>
 
-      <span class="status-badge">Confirmed</span>
+      <span class="status-badge"></span>
 
     </div>
 
@@ -140,11 +142,11 @@
 
       <!-- Buttons -->
       <div class="details-actions">
-        <button class="primary" onclick="updateStatus('collected')">
+        <button class="primary" onclick="updateStatusSafe('collected')">
           Update Status to Collected
         </button>
 
-        <button class="secondary" onclick="updateStatus('confirmed')">
+        <button class="secondary" onclick="updateStatusSafe('confirmed')">
           Mark as Confirmed
         </button>
       </div>
@@ -216,7 +218,13 @@
   </div>
 
 </div>
+<div id="reports" class="tab-content">
+  <div class="card">
+    <h3>Complaint Reports</h3>
+    <p class="subtext">View and manage all submitted complaint reports.</p>
+    <div class="issue-list" id="reportList"></div>
 
+  </div>
 
 <script src="staff_dashboard.js"></script>
 

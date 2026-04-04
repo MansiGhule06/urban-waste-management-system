@@ -112,11 +112,11 @@ document.getElementById('recyclerLoginBtn').addEventListener('click', async () =
         if (response.ok) {
             message.style.color = "green";
             message.textContent = result.message;
-
+                   localStorage.setItem("recycler_user", JSON.stringify(result.recycler));
             alert("LOGIN SUCCESSFUL ✅");
 
             // redirect if needed
-            // window.location.href = "recycler/dashboard.html";
+            window.location.href = "recyclerdashboard.html";
 
         } else {
             message.style.color = "red";
