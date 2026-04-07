@@ -39,6 +39,31 @@ document.getElementById('staffRegisterBtn').addEventListener('click', async () =
         message.textContent = "All fields are required ❌";
         return;
     }
+     else if (password.length < 6 ) {
+            message.style.color = "red";
+            message.textContent = "Password must be at least 6 characters ❌";
+            return;
+        }
+        else if (!/^\S+@\S+\.\S+$/.test(email)) {   
+            message.style.color = "red";
+            message.textContent = "Invalid email format ❌";
+            return;
+        }
+        else if (!/^\d{10}$/.test(mobile)) {
+            message.style.color = "red";
+            message.textContent = "Mobile number must be 10 digits ❌";
+            return;
+        }
+        else if (password !== confirm) {
+            message.style.color = "red";
+            message.textContent = "Passwords do not match ❌";
+            return;
+        }
+        else if (password !== confirm) {
+            message.style.color = "red";
+            message.textContent = "Passwords do not match ❌";
+            return;
+        }
 
     if (password !== confirm) {
         message.style.color = "red";

@@ -20,38 +20,7 @@ function switchResidentTab(tabName) {
     }
 }
 
-// Resident Registration
-document.getElementById('residentRegisterBtn').addEventListener('click', async () => {
 
-    const data = {
-        fullname: document.getElementById('residentFullname').value,
-        email: document.getElementById('residentEmail').value,
-        mobile_number: document.getElementById('residentMobile').value,
-        pass: document.getElementById('resConfirm').value
-    };
-
-    const message = document.getElementById('residentMessage');
-
-    try {
-        const response = await fetch('http://localhost:3000/api/resident/register', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)   // ✅ use data here
-        });
-
-        const result = await response.json();
-        message.textContent = result.message;
-if (response.ok) {
-    document.getElementById('residentFullname').value = '';
-    document.getElementById('residentEmail').value = '';
-    document.getElementById('residentMobile').value = '';
-    document.getElementById('resConfirm').value = '';
-}
-
-    } catch (err) {
-        message.textContent = 'Error connecting to backend';
-    }
-});
 
  // ================= REGISTER =================
     document.getElementById('residentRegisterBtn').addEventListener('click', async () => {
@@ -70,8 +39,27 @@ if (response.ok) {
             message.textContent = "All fields are required ❌";
             return;
         }
-
-        if (password !== confirm) {
+        else if (password.length < 6 ) {
+            message.style.color = "red";
+            message.textContent = "Password must be at least 6 characters ❌";
+            return;
+        }
+        else if (!/^\S+@\S+\.\S+$/.test(email)) {   
+            message.style.color = "red";
+            message.textContent = "Invalid email format ❌";
+            return;
+        }
+        else if (!/^\d{10}$/.test(mobile)) {
+            message.style.color = "red";
+            message.textContent = "Mobile number must be 10 digits ❌";
+            return;
+        }
+        else if (password !== confirm) {
+            message.style.color = "red";
+            message.textContent = "Passwords do not match ❌";
+            return;
+        }
+        else if (password !== confirm) {
             message.style.color = "red";
             message.textContent = "Passwords do not match ❌";
             return;
@@ -133,10 +121,11 @@ if (response.ok) {
             const response = await fetch('http://localhost:3000/api/resident/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, password: pass })            });
+                body: JSON.stringify({ email,pass })            });
 
             const result = await response.json();
-
+console.log("Email:", email);
+console.log("Password:", pass);
             if (response.ok) {
                 message.style.color = "green";
                 message.textContent = result.message;
